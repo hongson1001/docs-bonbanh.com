@@ -147,7 +147,7 @@
 
 ---
 
-## 6. Rủi ro & cách tránh “lỗ” khi báo giá rẻ
+## 6.
 
 - **Scope SEO (SSR):** Universal tăng chi phí; nếu gói rẻ thì thỏa thuận **CSR + prerender một số route** hoặc làm SSR ở phase sau.
 - **Thanh toán + kế toán đối soát:** luôn tính thêm buffer test + sandbox merchant.
