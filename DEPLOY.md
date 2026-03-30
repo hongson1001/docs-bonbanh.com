@@ -159,10 +159,10 @@ npm run migration:run
 - Process Node SSR (thay vì chỉ static) hoặc dùng **prerender** cho một số route.
 - Nginx proxy tới cổng SSR; tăng RAM và tunning cache.
 
-### B.10 Webhook thanh toán (VNPay/MoMo)
+### B.10 Thanh toán & webhook (cần thống nhất trước khi triển khai)
 
-- URL webhook phải **HTTPS** công khai.
-- Whitelist IP nếu cổng cung cấp; verify chữ ký server-side; idempotent xử lý đơn.
+- **Không** cố định nhà cung cấp (MoMo, VNPay, cổng khác, hay chỉ chuyển khoản + admin xác nhận). Phần này **phải bàn chi tiết** với chủ sản phẩm rồi mới cấu hình môi trường và code.
+- Nếu dùng **cổng có webhook:** URL callback phải **HTTPS** công khai; verify chữ ký server-side; xử lý đơn **idempotent**; tuỳ cổng có thể cần whitelist IP.
 
 ### B.11 Checklist sau deploy
 

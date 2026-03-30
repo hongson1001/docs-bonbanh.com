@@ -49,7 +49,7 @@
 
 - Đăng ký **thành viên VIP** / bảng giá (hiển thị gói).
 - **Giới hạn số tin** theo gói; **ưu tiên hiển thị** / gắn nhãn VIP trên listing.
-- **Thanh toán online:** tích hợp 1 cổng (VNPay hoặc MoMo) — **phí cổng + tài khoản merchant do khách hàng**; code chỉ tích hợp API + webhook.
+- **Thanh toán / thu phí (VIP, tin…):** **không** gắn sẵn một hình thức cụ thể (MoMo, VNPay, ZaloPay, QR ngân hàng, chuyển khoản + đối soát thủ công…). Cần **bàn chi tiết riêng** (phụ lục hoặc buổi workshop): luồng nghiệp vụ, cổng nào (nếu có), hợp đồng merchant, hoàn tiền, biên lai, bảo mật webhook — rồi mới ước lượng **giờ làm + phí tích hợp**. Ví dụ “tích hợp MoMo” chỉ là **một trong các phương án**, không phải mặc định.
 
 ### 2.4 Uy tín / xác minh
 
@@ -131,7 +131,7 @@
 
 ### Giai đoạn 4 — VIP + thanh toán (3–5 tuần)
 
-- Gói VIP, giới hạn tin, ưu tiên sort; tích hợp 1 cổng thanh toán + webhook.
+- Gói VIP, giới hạn tin, ưu tiên sort; **luồng thanh toán** theo thỏa thuận chi tiết (có thể cổng điện tử + webhook, hoặc quy trình thủ công — **đã bàn rõ ở phụ lục thanh toán**, không giả định trước MoMo/VNPay).
 - Trang bảng giá VIP.
 
 ### Giai đoạn 5 — Xác minh giấy tờ + CMS + SEO (2–4 tuần)
@@ -221,10 +221,22 @@ Mục này để **lấp nhanh “khung” điều hướng** cho demo / báo gi
 
 ## 8. Ngoài phạm vi (để không tranh cãi khi báo giá)
 
-- Domain, VPS, SSL, backup, WAF, CDN, email SMTP, SMS OTP, tài khoản merchant thanh toán.
+- Domain, VPS, SSL, backup, WAF, CDN, email SMTP, SMS OTP; **tài khoản / hợp đồng merchant** (nếu chọn cổng thanh toán) do khách lo sau khi đã **chốt phương án** — không mặc định MoMo hay bất kỳ cổng nào.
 - Nội dung pháp lý, hợp đồng người dùng, DMCA, bảo vệ dữ liệu cá nhân (tư vấn luật).
 - App mobile native; chat real-time nội bộ; AI gợi ý giá.
 - Migrate/nhập dữ liệu từ hệ thống cũ; content writing.
+
+### 8.1 Thanh toán — **bắt buộc bàn chi tiết** (không gắn sẵn MoMo/VNPay/…)
+
+Trước khi báo giờ/code cho phần thu tiền, nên có **phụ lục hoặc biên bản** ghi rõ ít nhất:
+
+- Hình thức: **cổng điện tử** / **QR động** / **chuyển khoản + admin xác nhận** / kết hợp.
+- Ai là chủ tài khoản thụ hưởng; có cần **hoá đơn** / đối soát kế toán thế nào.
+- Luồng: tạo đơn → thanh toán → **kích hoạt VIP / gói** khi nào (realtime webhook hay duyệt tay).
+- **Hoàn tiền**, gói lỗi, tranh chấp — ai xử lý.
+- Bảo mật: chữ ký webhook, chống gọi giả callback.
+
+Sau khi thống nhất mới chọn công nghệ cụ thể; **tài liệu này không quy định** phải qua MoMo hay cổng nào.
 
 ---
 
@@ -249,7 +261,7 @@ Mục này để **lấp nhanh “khung” điều hướng** cho demo / báo gi
 ### Mở rộng sau (không thuộc gói 15–20tr)
 
 - [ ] Lọc nâng cao (giá, năm, km…), phân trang 15/20/30/60 tuỳ chọn, quên mật khẩu email.
-- [ ] Tin mua, salon, VIP, thanh toán, xác minh giấy tờ, CMS đầy đủ, SSR.
+- [ ] Tin mua, salon, VIP, **thanh toán** (sau phụ lục mục 8.1), xác minh giấy tờ, CMS đầy đủ, SSR.
 
 ---
 
