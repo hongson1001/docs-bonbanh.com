@@ -147,7 +147,7 @@
 
 ---
 
-## 6.
+## 6
 
 - **Scope SEO (SSR):** Universal tăng chi phí; nếu gói rẻ thì thỏa thuận **CSR + prerender một số route** hoặc làm SSR ở phase sau.
 - **Thanh toán + kế toán đối soát:** luôn tính thêm buffer test + sandbox merchant.
@@ -156,19 +156,44 @@
 
 ---
 
-## 7. Báo giá tham khảo (chỉ code) — **mức hợp lý, không ép rẻ quá mức**
+## 7. Báo giá — **một gói duy nhất (Option 1)**
 
-Giả định: đội có kinh nghiệm Angular/NestJS; UI dựa NG-ZORRO + Tailwind (không thiết kế Figma độc quyền); 2 vòng chỉnh sửa trong từng phase; bảo hành bug **30–60 ngày** sau bàn giao phase (thương lượng).
+**Giá (chỉ code):** **15.000.000 – 20.000.000 VNĐ**  
+**Tên gói:** **Khởi động (Starter)** — đủ để demo luồng chợ xe + mở rộng sau; **không** tương đương toàn bộ [Bonbanh.com](https://bonbanh.com/) (mục 2).
 
-| Gói | Phạm vi (tóm tắt) | Thời gian (tuần) | Giá (VNĐ) — tham khảo |
-|-----|-------------------|------------------|-------------------------|
-| **A — MVP vận hành** | Tin bán: CRUD + duyệt + lọc tỉnh/hãng/năm/giá + phân trang + ảnh + user + admin cơ bản + trang tĩnh tối thiểu. **Không** VIP/thanh toán, **không** tin mua, **không** salon, **không** xác minh giấy. CSR (không Universal). | 10–14 | **185.000.000 – 265.000.000** |
-| **B — Giống Bonbanh “đủ dùng”** | Gói A + **tin mua** + **salon** + VIP showroom (hiển thị thủ công) + CMS đầy đủ hơn + badge xác minh (upload + duyệt). Vẫn **chưa** cổng thanh toán tự động (VIP kích hoạt thủ công admin). SSR **tuỳ chọn** (+25–45tr nếu tách phase). | +8–12 | **+155.000.000 – 240.000.000** (cộng gói A) |
-| **C — Gần parity đầy đủ** | Gói B + **gói VIP** + **1 cổng thanh toán** (VNPay hoặc MoMo) + webhook + quản lý đơn; tối ưu sort ưu tiên VIP; **Angular Universal** cho public (SEO). | +6–10 | **+135.000.000 – 220.000.000** (cộng gói A+B tương ứng) |
+### Điều kiện chung (để khớp mức giá)
 
-**Tổng gói C (ước lượng trọn gói):** khoảng **475.000.000 – 725.000.000 VNĐ** nếu làm xuyên suốt full scope như bảng trên (một team nhỏ, không redesign luxury).
+- Stack: **Angular + Tailwind + NG-ZORRO** (frontend) · **NestJS + PostgreSQL** (API + DB).
+- **Không** thiết kế Figma riêng; UI theo component có sẵn + chỉnh layout.
+- Hỗ trợ **01 vòng** chỉnh sửa nhỏ trong phạm vi đã ký (fix lỗi hiển thị / text / lọc cơ bản).
+- Bảo hành lỗi **14 ngày** kể từ ngày bàn giao mã nguồn (chỉ lỗi trong phạm vi gói).
+- Bàn giao: mã nguồn + **README** chạy local (Docker Compose hoặc hướng dẫn `npm`); **không** gồm cấu hình VPS/domain thực tế (xem [DEPLOY.md](./DEPLOY.md) để khách tự hoặc thuê thêm).
 
-**“Rẻ mà không lỗ” với freelancer solo:** chỉ nên nhận **Gói A** trong **10–14 tuần** với giá sàn ~**180–220tr** nếu họ tự làm fullstack và chấp nhận ít vòng chỉnh sửa; dưới mức đó rủi ro cắt scope hoặc nợ kỹ thuật.
+### Phạm vi “đầy đủ” trong gói (nằm trong 15–20tr)
+
+| Nhóm | Có trong gói |
+|------|----------------|
+| **Công khai** | Trang chủ (layout kiểu marketplace); **danh sách tin bán** có **phân trang**; **lọc** tối thiểu: **tỉnh/thành** + **hãng** (dữ liệu danh mục seed trong DB); **chi tiết tin** (tiêu đề, giá, mô tả, vài thông số cố định, ảnh — tối đa **5 ảnh**/tin, lưu **local disk** hoặc thư mục `uploads`, không tích hợp S3). |
+| **Tài khoản** | **Đăng ký / đăng nhập** (JWT); **đăng tin bán** (form + upload ảnh); user **xem/sửa/xoá** tin của mình. |
+| **Admin tối thiểu** | **01** role admin (hard-code hoặc flag DB): **duyệt tin** (chờ duyệt → hiển thị / từ chối), **danh sách user** (xem + khoá/mở đơn giản). |
+| **API** | REST cơ bản + **Swagger** (OpenAPI). |
+| **Dữ liệu** | Seed **tỉnh/thành** + **hãng** (bản rút gọn); **không** bắt buộc đủ mọi dòng xe Bonbanh. |
+
+### Không nằm trong gói 15–20tr (mở rộng phase sau)
+
+- Tin **cần mua**, **salon**, **VIP**, **thanh toán online**, **xác minh giấy tờ**, CMS trang tĩnh đầy đủ, **Angular Universal (SSR)**, email/SMS production, chat, tối ưu SEO nâng cao, import dữ liệu lớn, CDN/object storage.
+
+### Thời gian tham khảo
+
+- **3–5 tuần** (1 người fullstack, có thể dùng AI hỗ trợ code — vẫn cần tích hợp, test, bàn giao).
+
+### Cách báo giá với khách (tránh hiểu nhầm)
+
+- Ghi rõ: *“Gói Khởi động — 15–20 triệu — nền tảng tin bán + duyệt tin, không gồm các mục … (liệt kê như trên).”*
+
+---
+
+**Tham chiếu thị trường (gói lớn hơn, đã từng nêu trong tài liệu):** MVP vận hành đầy đủ hơn (nhiều filter, ảnh/object storage, vòng chỉnh sửa & bảo hành dài hơn) thường nằm khoảng **185–265 triệu** trở lên; gói **15–20tr** là **cắt scope có chủ đích**, không phải cùng một sản phẩm.
 
 ---
 
@@ -181,17 +206,23 @@ Giả định: đội có kinh nghiệm Angular/NestJS; UI dựa NG-ZORRO + Tail
 
 ---
 
-## 9. Checklist nghiệm thu (trích để đưa vào hợp đồng)
+## 9. Checklist nghiệm thu
 
-- [ ] Danh sách tin bán: lọc đa điều kiện + phân trang 15/20/30/60.
-- [ ] Chi tiết tin: đủ field thông số như mẫu Bonbanh (theo bảng field đính kèm).
-- [ ] Đăng tin / sửa / ẩn; admin duyệt / từ chối.
-- [ ] Đăng ký / đăng nhập / quên mật khẩu.
-- [ ] (Theo gói) Tin mua, salon, VIP, thanh toán, xác minh, CMS, SSR.
-- [ ] Swagger/OpenAPI; build Docker; README deploy.
+### Gói Khởi động 15–20tr (đưa vào hợp đồng)
+
+- [ ] Danh sách tin: phân trang + lọc **tỉnh** + **hãng** (theo seed).
+- [ ] Chi tiết tin: tiêu đề, giá, mô tả, thông số tối thiểu đã thống nhất, tối đa **5 ảnh**/tin.
+- [ ] User: đăng ký / đăng nhập; đăng / sửa / xoá tin của mình.
+- [ ] Admin: duyệt / từ chối tin; khoá / mở user cơ bản.
+- [ ] Swagger/OpenAPI; README chạy local (hoặc Docker Compose).
+
+### Mở rộng sau (không thuộc gói 15–20tr)
+
+- [ ] Lọc nâng cao (giá, năm, km…), phân trang 15/20/30/60 tuỳ chọn, quên mật khẩu email.
+- [ ] Tin mua, salon, VIP, thanh toán, xác minh giấy tờ, CMS đầy đủ, SSR.
 
 ---
 
-**Tài liệu này** dùng để trao đổi với đội dev / freelancer: đính kèm **gói A/B/C**, **có/không SSR**, **có/không thanh toán**, và số vòng chỉnh sửa để chốt giá cuối.
+**Tài liệu này** dùng để trao đổi với đội dev / freelancer: **một gói duy nhất (mục 7)** hoặc mở rộng sau bằng phụ lục scope / giá phase 2.
 
 *Cập nhật: tháng 3/2026.*
